@@ -1,1 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据新闻：青蛙的“三张面孔”</title>
+    <!-- 引入 ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        /* 全局及基础样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* 白底 */
+            color: #000000; /* 字体黑色 */
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            font-size: 16px;
+        }
 
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 标题样式 */
+        h1 {
+            color: #1565C0; /* 蓝色主色调 */
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #0D47A1; /* 深蓝色 */
+            font-size: 24px;
+            border-left: 6px solid #1976D2; /* 蓝色装饰条 */
+            padding-left: 15px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        /* 段落样式 */
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+
+        /* 重点数据高亮 */
+        .highlight {
+            color: #1565C0;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* 图表容器 */
+        .chart-box {
+            width: 100%;
+            height: 500px;
+            margin: 30px 0;
+            background-color: #F5F9FF; /* 极浅的蓝色背景衬托图表 */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(21, 101, 192, 0.08); /* 蓝色阴影 */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* 图片容器 */
+        .image-box {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 图注说明 */
+        .caption {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            text-indent: 0;
+        }
+        
+        /* 结语部分 */
+        .conclusion {
+            background-color: #E3F2FD;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 50px;
+            border-left: 5px solid #1565C0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>数据新闻：青蛙的“三张面孔”<br>——多样、有用，却在退场</h1>
+    <div class="subtitle">数据来源：IUCN红色名录、Amphibian Ark等</div>
+
+    <p>全球两栖动物刚刚跨过一个里程碑：被描述的物种数达到 <span class="highlight">9,072种</span>，其中无尾目（青蛙与蟾蜍）约 <span class="highlight">7,828种</span>，占绝对多数。中国记录的蛙科物种有 <span class="highlight">164种</span>，从乡间水田的黑斑蛙、泽蛙，到山林溪流中的石蛙，它们构成了一个被低估的“隐形物种库”。</p>
+    
+    <p>然而，同一组数据也指向另一面：在IUCN红色名录评估中，<span class="highlight">41%</span> 的两栖动物被归入受威胁等级，蛙类（无尾目）的受威胁比例为 <span class="highlight">39%</span>，两栖动物是脊椎动物中受威胁最严重的一类。</p>
+
+    <h2>一、青蛙的“数字账本”：多样与危机并存</h2>
+    <p>青蛙的生态价值有具体的“数字账本”。田间观察数据常被通俗地表述为“一只青蛙一天捕食害虫50至200只，一年可达1.5万只左右”。更严格的研究给出了“食谱占比”：菲律宾吕宋疣蛙的食谱中，水稻害虫占 54.1%；日本树蛙在豆田胃内容物分析中，蚜虫占全部猎物的 67.2%。这意味着青蛙并非“偶尔吃虫”，而是在特定农田生态系统中承担着可量化的害虫抑制功能。</p>
+    
+    <p>但这一功能正被栖息地丧失和气候变化削弱：全球评估显示，37% 的两栖动物种群状况恶化可归因于栖息地丧失，39% 与气候变化相关。保护青蛙的数据缺口同样值得注意。两栖动物占全球受威胁脊椎动物的 25.2%，获得的保护资金却仅占 3.4%。</p>
+
+    <!-- 表1 转化为的折线图 -->
+    <h2>图1：青蛙科普数据新闻关键变量</h2>
+    <p class="caption">（将表1转化为折线图，悬停或点击数据点可查看具体数值与比例）</p>
+    <div id="lineChart" class="chart-box"></div>
+
+    <!-- 图1 转化为的柱形图 -->
+    <h2>图2：受威胁物种比例对比</h2>
+    <p class="caption">（IUCN 红色名录评估类群，条形长度按比例示意）</p>
+    <div id="barChart" class="chart-box"></div>
+
+    <!-- 图2 (GIF动图) -->
+    <h2>图3：一只青蛙的“捕食倒计时”</h2>
+    <div class="image-box">
+        <!-- 引用同级目录下的 31.gif -->
+        <img src="31.gif" alt="一只青蛙的捕食倒计时 GIF">
+    </div>
+
+    <div class="conclusion">
+        <p><strong>三点收束：</strong>青蛙的多样性仍在被“发现”（9,000种里程碑），但其生存空间在被“压缩”（41%受威胁）；它在农田中的功能可以被量化（害虫占比过半），却只获得极不相称的保护资源（3.4%）。数据新闻的意义不在于把青蛙“可爱化”，而在于把它的退场从一句“数量减少”变成一组可追踪、可比较、可追问的数字。</p>
+    </div>
+
+</div>
+
+<script>
+    // ==========================================
+    // 1. 表1 转化：动态交互折线图
+    // ==========================================
+    var lineChart = echarts.init(document.getElementById('lineChart'));
+    
+    // 提取表1中的数据
+    var lineXData = [
+        '全球两栖动物(种)', '无尾目(种)', '中国蛙科(种)', 
+        '两栖动物受威胁(%)', '蛙类受威胁(%)', 
+        '一天捕食害虫下限(只)', '一天捕食害虫上限(只)', '一年捕食害虫(只)', 
+        '吕宋疣蛙害虫占比(%)', '日本树蛙蚜虫占比(%)', 
+        '栖息地丧失威胁(种)', '占受威胁脊椎动物(%)', '获得保护资金比例(%)'
+    ];
+    // 数据统一映射为数值，百分比在Tooltip中格式化
+    var lineData = [9072, 7828, 164, 41, 39, 50, 200, 15000, 54.1, 67.2, 2684, 25.2, 3.4];
+
+    var lineOption = {
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(13, 71, 161, 0.9)', // 深蓝色提示框
+            textStyle: { color: '#fff' },
+            formatter: function (params) {
+                var param = params[0];
+                var index = param.dataIndex;
+                var val = param.value;
+                var unit = "";
+                // 根据索引判断单位
+                if (index < 3 || index === 10) unit = " 种";
+                else if (index >= 5 && index <= 7) unit = " 只";
+                else unit = " %";
+                
+                return param.name + '<br/>' + param.marker + ' 数值: <b>' + val + unit + '</b>';
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '15%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: lineXData,
+            axisLabel: {
+                color: '#333',
+                interval: 0,
+                rotate: 45, // 倾斜文字防止重叠
+                fontSize: 12
+            },
+            axisLine: { lineStyle: { color: '#1976D2' } }
+        },
+        yAxis: {
+            type: 'log', // 使用对数轴，因为数据跨度极大（从3.4到15000），否则小数据会看不见
+            name: '数值 (对数轴)',
+            nameTextStyle: { color: '#333' },
+            axisLabel: { color: '#333' },
+            splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+        },
+        series: [{
+            name: '数据值',
+            type: 'line',
+            data: lineData,
+            smooth: true, // 平滑曲线
+            symbolSize: 10, // 数据点大小
+            itemStyle: {
+                color: '#1976D2', // 蓝色线条
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            lineStyle: {
+                width: 3,
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                    { offset: 0, color: '#64B5F6' },
+                    { offset: 1, color: '#0D47A1' }
+                ])
+            },
+            // 标注每个数据点的具体数值
+            label: {
+                show: true,
+                position: 'top',
+                color: '#0D47A1',
+                fontWeight: 'bold',
+                formatter: '{c}'
+            },
+            // 突出显示数据点（动态交互）
+            emphasis: {
+                focus: 'series',
+                itemStyle: {
+                    color: '#FFC107', // 悬停时变为黄色高亮
+                    borderColor: '#0D47A1',
+                    borderWidth: 3,
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0,0,0,0.3)'
+                }
+            }
+        }]
+    };
+    lineChart.setOption(lineOption);
+
+    // ==========================================
+    // 2. 图1 转化：柱形图
+    // ==========================================
+    var barChart = echarts.init(document.getElementById('barChart'));
+    
+    var barOption = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'shadow' },
+            backgroundColor: 'rgba(13, 71, 161, 0.9)',
+            textStyle: { color: '#fff' },
+            formatter: '{b}: <b>{c}%</b>'
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: ['两栖动物', '蛙类（无尾目）', '哺乳动物', '鸟类'],
+            axisLabel: {
+                color: '#333',
+                fontSize: 14,
+                fontWeight: 'bold'
+            },
+            axisLine: { lineStyle: { color: '#1976D2' } }
+        },
+        yAxis: {
+            type: 'value',
+            name: '受威胁比例 (%)',
+            max: 50, // 设置最大值便于对比
+            axisLabel: { color: '#333' },
+            splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+        },
+        series: [{
+            type: 'bar',
+            data: [
+                { value: 41, itemStyle: { color: '#0D47A1' } }, // 最深蓝
+                { value: 39, itemStyle: { color: '#1976D2' } }, // 深蓝
+                { value: 26, itemStyle: { color: '#64B5F6' } }, // 浅蓝
+                { value: 11, itemStyle: { color: '#90CAF9' } }  // 极浅蓝
+            ],
+            barWidth: '40%',
+            label: {
+                show: true,
+                position: 'top',
+                formatter: '{c}%',
+                color: '#0D47A1',
+                fontSize: 14,
+                fontWeight: 'bold'
+            },
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                }
+            }
+        }]
+    };
+    barChart.setOption(barOption);
+
+    // ==========================================
+    // 3. 窗口大小改变时自适应
+    // ==========================================
+    window.addEventListener('resize', function() {
+        lineChart.resize();
+        barChart.resize();
+    });
+</script>
+
+</body>
+</html>
